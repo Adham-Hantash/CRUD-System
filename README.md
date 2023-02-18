@@ -1,1 +1,1 @@
-A create, read, update, delete (CRUD) system for courses selection system using java script
+A create, read, write, and delete (CRUD) system for courses using javascript, this system gives the ability to add update, and delete courses with validation for each input, the courses we create will appear in a table that includes all details inserted while creating the desired course, you can search for any course within the table using the search bar.
