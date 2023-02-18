@@ -23,21 +23,28 @@ else{
 
 Submit.onclick = function(event){
     event.preventDefault();
-    if(Submit.value == "Submit")
+    if(Submit.value == "Submit"){
     addCourse();
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Course added succesfully!',
+      showConfirmButton: false,
+      timer: 1500
+    })
+}
     else
     updateCourse(currentIndex);
-
-    Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Your work has been saved',
-        showConfirmButton: false,
-        timer: 1500
-      })
-    printData();
-    clearData()
-    readData();
+    
+      printData();
+      clearData();
+      readData();
+      CourseName.classList.remove('is-valid');
+      CourseCatigory.classList.remove('is-valid');
+      CoursePrice.classList.remove('is-valid');
+      CourseDescription.classList.remove('is-valid');
+      CourseCapacity.classList.remove('is-valid');
+     
 }
 
 //create course
@@ -104,7 +111,7 @@ Swal.fire({
         readData();
       Swal.fire(
         'Deleted!',
-        'Your file has been deleted.',
+        'Course has been deleted.',
         'success'
       )
     }
@@ -128,7 +135,7 @@ deleteAll.onclick = function(){
             readData();
           Swal.fire(
             'Deleted!',
-            'Your file has been deleted.',
+            'Courses has been deleted.',
             'success'
           )
         }
@@ -169,6 +176,7 @@ CoursePrice.value=selCourse.CoursePrice;
 CourseDescription.value=selCourse.CourseDescription;
 CourseCapacity.value=selCourse.CourseCapacity;
 Submit.value="Update Course";
+
 }
 
 function updateCourse(i){
@@ -179,9 +187,140 @@ function updateCourse(i){
         CourseDescription:CourseDescription.value,
         CourseCapacity:CourseCapacity.value
     };
+    Submit.removeAttribute('disabled');
     courses[i]=course;
     localStorage.setItem("courses",JSON.stringify(courses));
     Submit.value="Submit";
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Course updated succesfully!',
+      showConfirmButton: false,
+      timer: 1500
+    })
+    clearData();
     readData();
 }
 
+/* chars
+ {3 - 10}
+ first is capital
+ CourseName input
+ */
+CourseName.onkeyup = function(){
+  var pattern = /^[A-Z][a-z\s]{2,10}$/;
+  if(pattern.test(CourseName.value.trim())){
+    if(CourseName.classList.contains('is-invalid')){
+      CourseName.classList.replace('is-invalid' , 'is-valid')
+    }else{
+      Submit.removeAttribute('disabled');
+      CourseName.classList.add('is-valid');
+    }
+
+  }
+  else{
+    if(CourseName.classList.contains('is-valid')){
+      CourseName.classList.replace('is-valid' , 'is-invalid')
+    }
+    else{
+      Submit.setAttribute('disabled' , 'disabled' );
+      CourseName.classList.add('is-invalid');
+    }
+  }
+}
+
+//####################################################
+// CourseName input
+CourseCatigory.onkeyup = function(){
+  var pattern = /^[A-Z][a-z\s]{2,20}$/;
+  if(pattern.test(CourseCatigory.value.trim())){
+    if(CourseCatigory.classList.contains('is-invalid')){
+      CourseCatigory.classList.replace('is-invalid' , 'is-valid')
+    }else{
+      Submit.removeAttribute('disabled');
+      CourseCatigory.classList.add('is-valid');
+    }
+
+  }
+  else{
+    if(CourseCatigory.classList.contains('is-valid')){
+      CourseCatigory.classList.replace('is-valid' , 'is-invalid')
+    }
+    else{
+      Submit.setAttribute('disabled' , 'disabled' );
+      CourseCatigory.classList.add('is-invalid');
+    }
+  }
+}
+
+//####################################################
+// CoursePrice input
+CoursePrice.onkeyup = function(){
+  var pattern = /^[0-9]{2,4}$/;
+  if(pattern.test(CoursePrice.value.trim())){
+    if(CoursePrice.classList.contains('is-invalid')){
+      CoursePrice.classList.replace('is-invalid' , 'is-valid')
+    }else{
+      Submit.removeAttribute('disabled');
+      CoursePrice.classList.add('is-valid');
+    }
+
+  }
+  else{
+    if(CoursePrice.classList.contains('is-valid')){
+      CoursePrice.classList.replace('is-valid' , 'is-invalid')
+    }
+    else{
+      Submit.setAttribute('disabled' , 'disabled' );
+      CoursePrice.classList.add('is-invalid');
+    }
+  }
+}
+
+//####################################################
+// CourseDescription input
+CourseDescription.onkeyup = function(){
+  var pattern = /^[a-z\s]{3,100}$/;
+  if(pattern.test(CourseDescription.value.trim())){
+    if(CourseDescription.classList.contains('is-invalid')){
+      CourseDescription.classList.replace('is-invalid' , 'is-valid')
+    }else{
+      Submit.removeAttribute('disabled');
+      CourseDescription.classList.add('is-valid');
+    }
+
+  }
+  else{
+    if(CourseDescription.classList.contains('is-valid')){
+      CourseDescription.classList.replace('is-valid' , 'is-invalid')
+    }
+    else{
+      Submit.setAttribute('disabled' , 'disabled' );
+      CourseDescription.classList.add('is-invalid');
+    }
+  }
+}
+
+//####################################################
+// CourseCapacity input
+CourseCapacity.onkeyup = function(){
+  var pattern = /^[0-9]{2,4}$/;
+  if(pattern.test(CourseCapacity.value.trim())){
+    if(CourseCapacity.classList.contains('is-invalid')){
+      CourseCapacity.classList.replace('is-invalid' , 'is-valid')
+    }else{
+      Submit.removeAttribute('disabled');
+      CourseCapacity.classList.add('is-valid');
+    }
+
+  }
+  else{
+    if(CourseCapacity.classList.contains('is-valid')){
+      CourseCapacity.classList.replace('is-valid' , 'is-invalid')
+    }
+    else{
+      Submit.setAttribute('disabled' , 'disabled' );
+      CourseCapacity.classList.add('is-invalid');
+    }
+  }
+}
