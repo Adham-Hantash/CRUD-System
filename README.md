@@ -21,5 +21,6 @@ This project was built using the following technologies:
 HTML
 CSS
 JavaScript
+
 Contributing
 If you would like to contribute to this project, feel free to fork the repository and submit a pull request. Please make sure that any changes you make are in line with the goals of the project, and include a clear description of what you have changed or added.
